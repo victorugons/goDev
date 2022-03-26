@@ -10,6 +10,13 @@ class ViewController: UIViewController {
         return table
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+        registerCell()
+        fetchChats()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -33,13 +40,6 @@ class ViewController: UIViewController {
     @objc private func callSecondView() {
         let secondViewController = SecondViewController()
         navigationController?.present(secondViewController, animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureView()
-        registerCell()
-        fetchChats()
     }
     
     func configureView() {
@@ -87,6 +87,8 @@ extension ViewController: UITableViewDelegate {
         } else {
             present(secondViewController, animated: true)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
 }
