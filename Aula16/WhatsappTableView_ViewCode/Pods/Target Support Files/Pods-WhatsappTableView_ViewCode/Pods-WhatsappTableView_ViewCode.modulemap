@@ -1,0 +1,6 @@
+module Pods_WhatsappTableView_ViewCode {
+  umbrella header "Pods-WhatsappTableView_ViewCode-umbrella.h"
+
+  export *
+  module * { export * }
+}
