@@ -26,5 +26,4 @@ class HomeTableViewCell: UITableViewCell {
         categoryLabel.text = restaurant.category
         ratingLabel.text = String(restaurant.rating)
     }
-    
 }

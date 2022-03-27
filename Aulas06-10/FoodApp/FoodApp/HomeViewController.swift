@@ -3,10 +3,13 @@ import UIKit
 class HomeViewController: UIViewController {
 
     //MARK: IBOutlets
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     
     //MARK: Variables Declaration
     private var restaurants: [Restaurant] = []
+    enum restaurantNames{
+        case mcdonalds
+    }
     
     //MARK: Life Cycle
     override func viewDidLoad() {
@@ -41,9 +44,18 @@ class HomeViewController: UIViewController {
 }
 
 
-//MARK: Public methods
 extension HomeViewController: UITableViewDelegate {
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let itemsCollectionViewController = segue.destination as? ItemsCollectionViewController
+        itemsCollectionViewController?.title = sender as? String
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: ItemsCollectionViewController.identifier, sender: restaurants[indexPath.row].name)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -58,6 +70,4 @@ extension HomeViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return restaurants.count
     }
-    
-    
 }
